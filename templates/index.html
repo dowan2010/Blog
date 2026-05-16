@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}홈 - 블로그{% endblock %}
+
+{% block content %}
+<section class="post-list">
+    <h1>전체 글</h1>
+
+{% if posts %}
+        {% for post in posts %}
+        <article class="post-card">
+            <h2><a href="/posts/{{ post.id }}">{{ post.title }}</a></h2>
+            <p class="post-meta">{{ post.created_at.strftime('%Y년 %m월 %d일') }}</p>
+            <p>{{ post.content[:100] }}...</p>
+        </article>
+        {% endfor %}
+    {% else %}
+        <p>아직 작성된 글이 없습니다.</p>
+    {% endif %}
+</section>
+{% endblock %}

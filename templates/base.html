@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}블로그{% endblock %}</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">내 블로그</a>
+            <form action="/posts/search" method="get" class="nav-search">
+                <i data-lucide="search" class="search-icon"></i>
+                <input type="text" name="q" placeholder="검색...">
+            </form>
+            <div class="nav-links">
+                <a href="/">홈</a>
+                <a href="/about">소개</a>
+                {% if is_admin %}
+                <a href="/posts/new">글쓰기</a>
+                {% endif %}
+                {% if request.cookies.get("access_token") %}
+                <form action="/auth/logout" method="post" style="display:inline">
+                    <button type="submit">로그아웃</button>
+                </form>
+                {% else %}
+                <a href="/auth/login">로그인</a>
+                <a href="/auth/register">회원가입</a>
+                {% endif %}
+                <button id="theme-toggle" onclick="toggleTheme()"><i id="theme-icon" data-lucide="moon"></i></button>
+            </div>
+        </nav>
+    </header>
+    <script>
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            document.getElementById('theme-icon').setAttribute('data-lucide', next === 'dark' ? 'sun' : 'moon');
+            lucide.createIcons();
+        }
+        lucide.createIcons();
+        if (document.documentElement.getAttribute('data-theme') === 'dark') {
+            document.getElementById('theme-icon').setAttribute('data-lucide', 'sun');
+            lucide.createIcons();
+        }
+    </script>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2026 내 블로그</p>
+    </footer>
+</body>
+</html>

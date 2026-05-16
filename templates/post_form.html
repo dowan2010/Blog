@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}{% if post %}글 수정{% else %}글 작성{% endif %} - 블로그{% endblock %}
+
+{% block content %}
+<section class="post-form">
+    <h1>{% if post %}글 수정{% else %}새 글 작성{% endif %}</h1>
+
+    <form action="{% if post %}/posts/{{ post.id }}/edit{% else %}/posts{% endif %}" method="post">
+        <input type="text" name="title" placeholder="제목" value="{{ post.title if post else '' }}" required>
+        <textarea name="content" placeholder="내용을 입력하세요" required>{{ post.content if post else '' }}</textarea>
+        <button type="submit">{% if post %}수정{% else %}작성{% endif %}</button>
+        <a href="{% if post %}/posts/{{ post.id }}{% else %}/{% endif %}">취소</a>
+    </form>
+</section>
+{% endblock %}
