@@ -12,7 +12,8 @@ Tistory나 Velog 같은 플랫폼도 있지만, **직접 만들어보는 것 자
 FastAPI를 처음 배우는 시점이었고, ORM 없이 raw SQL을 직접 작성해보고 싶었습니다. (SQLD 준비 겸)
 JWT 인증, 쿠키 처리, 마크다운 렌더링까지 하나씩 붙여나가면서 풀스택 흐름을 직접 익혔습니다.
 
-> **백엔드(Python/FastAPI/SQL)는 직접 작성했으며, 프론트엔드(HTML/CSS)는 Claude AI와 협업하여 제작했습니다.**
+> 백엔드 개발자로서 Python/FastAPI/SQL 중심으로 직접 구현했습니다.
+> 프론트엔드(HTML/CSS)는 본인의 전문 영역이 아닌 만큼, Claude AI를 활용하여 구현에 집중했습니다.
 
 ---
 
