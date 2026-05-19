@@ -1,4 +1,4 @@
-# 📝 Dowan's Dev Blog
+# Blog
 
 FastAPI와 MariaDB로 직접 만든 개인 기술 블로그입니다.
 
