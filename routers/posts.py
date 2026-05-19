@@ -18,15 +18,6 @@ async def index(request: Request, current_user=Depends(get_current_user)):
 	is_admin = current_user.get("is_admin") if current_user else False
 	return templates.TemplateResponse("index.html", {"request": request, "posts": posts, "is_admin": is_admin})
 
-
-# GET /posts/{id} → get_post(id) 호출 → post_detail.html 렌더링
-
-# 1. 경로 매개변수로 id 받기
-# 2. get_post(id) 로 글 가져오기
-# 3. post_detail.html 렌더링
-#    → request, post 전달
-
-
 @router.get('/posts/search')
 async def search_posts(q: str, request: Request, current_user=Depends(get_current_user)):
 	posts = models.search_post(q)
@@ -45,7 +36,7 @@ async def get_post(id: int, request: Request, current_user=Depends(get_current_u
 	post = models.get_post(id)
 	post["content"] = markdown.markdown(
 		post["content"],
-		extensions=["fenced_code", "codehilite"]
+		extensions=["fenced_code", "codehilite", "tables"]
 	)
 	is_admin = current_user.get("is_admin") if current_user else False
 	comments = models.get_comments(id)
