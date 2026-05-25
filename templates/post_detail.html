@@ -63,11 +63,4 @@
     {% endif %}
 </section>
 
-<script>
-    // 댓글 수정 폼 토글 - 수정 버튼 누르면 열리고, 취소 누르면 닫힘
-    function toggleEditForm(commentId) {
-        const form = document.getElementById('edit-form-' + commentId);
-        form.style.display = form.style.display === 'none' ? 'block' : 'none';
-    }
-</script>
 {% endblock %}

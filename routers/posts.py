@@ -52,13 +52,11 @@ async def create_post(title: str = Form(...), content: str = Form(...), current_
 	post = models.create_post(title, content)
 	return RedirectResponse(url='/', status_code=303)
 
-
 @router.get("/posts/{id}/edit")
 async def edit_post(id: int, request: Request, current_user=Depends(get_current_user)):
 	post = models.get_post(id)
 	is_admin = current_user.get("is_admin") if current_user else False
 	return templates.TemplateResponse("post_form.html", {"request": request, "post": post, "is_admin": is_admin})
-
 
 @router.post('/posts/{id}/edit')
 async def update_post(id: int, title: str = Form(...), content: str = Form(...),
@@ -69,7 +67,6 @@ async def update_post(id: int, title: str = Form(...), content: str = Form(...),
 	post = models.update_post(id, title, content)
 	return RedirectResponse(url=f'/posts/{id}', status_code=303)
 
-
 @router.post('/posts/{id}/delete')
 async def delete_post(id: int, request: Request, current_user=Depends(get_current_user)):
 	is_admin = current_user.get("is_admin") if current_user else False
@@ -77,7 +74,6 @@ async def delete_post(id: int, request: Request, current_user=Depends(get_curren
 		return RedirectResponse(url=f'/posts/{id}', status_code=303)
 	post = models.delete_post(id)
 	return RedirectResponse(url='/', status_code=303)
-
 
 @router.get('/about')
 async def about(request: Request, current_user=Depends(get_current_user)):

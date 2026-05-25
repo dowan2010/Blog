@@ -11,15 +11,14 @@ import models
 load_dotenv()
 SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = os.getenv("ALGORITHM")
+
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 pwd_context = CryptContext(schemes=["bcrypt"])
 
-
 @router.get('/auth/register')
 async def register(request: Request):
 	return templates.TemplateResponse("register.html", {"request": request})
-
 
 # 비번 해시 저장
 @router.post('/auth/register')
@@ -34,11 +33,9 @@ async def register(request: Request, username: str = Form(...), password: str = 
 		})
 	return RedirectResponse(url="/auth/login", status_code=303)
 
-
 @router.get('/auth/login')
 async def login(request: Request):
 	return templates.TemplateResponse("login.html", {"request": request})
-
 
 @router.post('/auth/login')
 async def login(request: Request, username: str = Form(...), password: str = Form(...)):
@@ -67,7 +64,6 @@ async def login(request: Request, username: str = Form(...), password: str = For
 		response = RedirectResponse(url="/", status_code=303)
 		response.set_cookie(key="access_token", value=token)
 		return response
-
 
 @router.post('/auth/logout')
 async def logout(request: Request):

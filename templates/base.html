@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}블로그{% endblock %}</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/css/style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
+        // 깜빡임 방지를 위해 head에서 즉시 테마 적용
         const savedTheme = localStorage.getItem('theme') || 'light';
         document.documentElement.setAttribute('data-theme', savedTheme);
     </script>
@@ -37,21 +38,7 @@
             </div>
         </nav>
     </header>
-    <script>
-        function toggleTheme() {
-            const current = document.documentElement.getAttribute('data-theme');
-            const next = current === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', next);
-            localStorage.setItem('theme', next);
-            document.getElementById('theme-icon').setAttribute('data-lucide', next === 'dark' ? 'sun' : 'moon');
-            lucide.createIcons();
-        }
-        lucide.createIcons();
-        if (document.documentElement.getAttribute('data-theme') === 'dark') {
-            document.getElementById('theme-icon').setAttribute('data-lucide', 'sun');
-            lucide.createIcons();
-        }
-    </script>
+    <script src="/static/js/main.js"></script>
 
     <main>
         {% block content %}{% endblock %}
